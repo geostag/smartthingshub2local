@@ -1,0 +1,40 @@
+{
+  "name": "MQTT Climate Bridge",
+  "attributes": {
+    "lastPayload": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": ["value"]
+      },
+      "setter": "publishClimate",
+      "enumCommands": []
+    }
+  },
+  "commands": {
+    "publishClimate": {
+      "name": "publishClimate",
+      "arguments": [
+        {
+          "name": "temperature",
+          "optional": false,
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "humidity",
+          "optional": false,
+          "schema": {
+            "type": "number"
+          }
+        }
+      ]
+    }
+  }
+}

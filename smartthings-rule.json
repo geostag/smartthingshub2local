@@ -1,0 +1,67 @@
+{
+  "name": "Forward Zigbee Temp & Humidity to MQTT",
+  "actions": [
+    {
+      "if": {
+        "or": [
+          {
+            "changes": {
+              "operand": {
+                "device": {
+                  "devices": ["ZIGBEE_SENSOR_DEVICE_ID"],
+                  "component": "main",
+                  "capability": "temperatureMeasurement",
+                  "attribute": "temperature"
+                }
+              }
+            }
+          },
+          {
+            "changes": {
+              "operand": {
+                "device": {
+                  "devices": ["ZIGBEE_SENSOR_DEVICE_ID"],
+                  "component": "main",
+                  "capability": "relativeHumidityMeasurement",
+                  "attribute": "humidity"
+                }
+              }
+            }
+          }
+        ],
+        "then": [
+          {
+            "command": {
+              "devices": ["MQTT_PUBLISHER_DEVICE_ID"],
+              "commands": [
+                {
+                  "component": "main",
+                  "capability": "geostag.mqttClimateBridge",
+                  "command": "publishClimate",
+                  "arguments": [
+                    {
+                      "device": {
+                        "devices": ["ZIGBEE_SENSOR_DEVICE_ID"],
+                        "component": "main",
+                        "capability": "temperatureMeasurement",
+                        "attribute": "temperature"
+                      }
+                    },
+                    {
+                      "device": {
+                        "devices": ["ZIGBEE_SENSOR_DEVICE_ID"],
+                        "component": "main",
+                        "capability": "relativeHumidityMeasurement",
+                        "attribute": "humidity"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

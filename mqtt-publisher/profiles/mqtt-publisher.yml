@@ -1,0 +1,50 @@
+name: mqtt-publisher
+components:
+  - id: main
+    capabilities:
+      - id: geostag.mqttClimateBridge
+        version: 1
+      - id: refresh
+        version: 1
+    categories:
+      - name: Thermostat
+preferences:
+  - name: brokerIp
+    title: "Mosquitto Broker IP"
+    description: "local mqtt broker ip address"
+    required: true
+    preferenceType: string
+    definition:
+      stringType: text
+      default: "192.168.1.100"
+  - name: brokerPort
+    title: "mosquitto port"
+    description: "default 1883"
+    required: true
+    preferenceType: integer
+    definition:
+      minimum: 1
+      maximum: 65535
+      default: 1883
+  - name: mqttUser
+    title: "MQTT username"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+      default: ""
+  - name: mqttPass
+    title: "MQTT password"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: password
+      default: ""
+  - name: mqttTopic
+    title: "MQTT Publish Topic"
+    description: "topic name for temperatue and humidity data"
+    required: true
+    preferenceType: string
+    definition:
+      stringType: text
+      default: "smartthings/climate/SENSOR"

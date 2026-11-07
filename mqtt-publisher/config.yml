@@ -1,0 +1,5 @@
+name: 'MQTT Temperature Publisher'
+packageKey: 'mqtt-publisher'
+permissions:
+  lan: {}
+  discovery: {}
